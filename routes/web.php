@@ -20,15 +20,12 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-
-Route::get('/admin','Admin@index');
-Route::get('/admin/subject_creation','Admin@subject_creation');
-
-Route::post('/admin/add_new_subject','Admin@add_new_subject');
-
-Route::get('/admin/delete_subject/{subject_name}','Admin@delete_subject');
-Route::get('/admin/edit_subject/{subject_name}','Admin@edit_subject');
-Route::post('admin/edit_new_subject','Admin@edit_new_subject');
+Route::get('/teacher','Teacher@index');
+Route::get('/teacher/subject_creation','Teacher@subject_creation');
+Route::post('/teacher/add_new_subject','Teacher@add_new_subject');
+Route::get('/teacher/delete_subject/{subject_name}','Teacher@delete_subject');
+Route::get('/teacher/update_subject/{subject_name}','Teacher@update_subject');
+Route::post('/teacher/confirm_update_subject','Teacher@confirm_update_subject');
 
 
 
