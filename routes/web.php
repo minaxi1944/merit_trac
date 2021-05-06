@@ -28,6 +28,18 @@ Route::get('/teacher/update_subject/{subject_name}','Teacher@update_subject');
 Route::post('/teacher/confirm_update_subject','Teacher@confirm_update_subject');
 
 
+/*Student*/
+Route:: get('/student/signup','Student@student_signup');
+Route:: post('/student/add_new_student','Student@add_new_student');
+
+Route:: get('/student/student_login','Student@student_login');
+Route:: post('/student/stud_login','Student@stud_login');
+
+Route:: get('/student/student_dashboard','StudentOperation@student_dashboard');
+
+Route:: get('/student/student_logout','StudentOperation@student_logout');
+
+
 
 
 
