@@ -27,6 +27,14 @@ Route::get('/teacher/delete_subject/{subject_name}','Teacher@delete_subject');
 Route::get('/teacher/update_subject/{subject_name}','Teacher@update_subject');
 Route::post('/teacher/confirm_update_subject','Teacher@confirm_update_subject');
 
+Route::get('/admin/manage_exam','Admin@manage_exam');
+Route::post('/admin/add_new_exam','admin@add_new_exam');
+Route::get('/admin/exam_status/{id}','Admin@exam_status');
+Route::get('/admin/delete_exam/{id}','Admin@delete_exam');
+Route::get('/admin/update_exam/{id}','Admin@update_exam');
+Route::post('/admin/confirm_update_exam','Admin@confirm_update_exam');
+
+
 
 /*Student*/
 Route:: get('/student/signup','Student@student_signup');
