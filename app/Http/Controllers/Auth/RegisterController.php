@@ -8,6 +8,11 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use App\Http\Controllers\MailController;
+use Illuminate\Support\Facades\Mail;
+use App\Http\Requests;
 
 class RegisterController extends Controller
 {
@@ -32,7 +37,6 @@ class RegisterController extends Controller
     //protected $redirectTo = RouteServiceProvider::HOME;
     protected $redirectTo = '/admin';
 
-
     /**
      * Create a new controller instance.
      *
@@ -55,7 +59,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'uid' => ['required', 'exists:reg_teacher,tid' ,'unique:users'],
+            'uid' => ['required', 'exists:reg_teacher,tid'],
         ]);
     }
 
@@ -65,13 +69,27 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
+    
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'uid' => $data['uid'],
         ]);
-    }
+    //email data   
+    $email_data = array(
+        'name' => $data['name'],
+        'email' => $data['email'],
+    );     
+
+    //Send email with the template
+        Mail::send(['text'=>'mail'], $email_data, function($message) use ($email_data) {
+            $message->to($email_data['email'], $email_data['name'])
+                ->subject('Welcome people');
+            $message->from('salswe1011@gmail.com', 'Salria Pereira');
+        });
+        return $user;
+     }
 }

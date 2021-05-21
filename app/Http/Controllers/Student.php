@@ -8,8 +8,8 @@ use App\Course;
 use App\studentDetails;
 use Illuminate\Support\Facades\Validator;
 use Session;
-use Sentinel;
-use Reminder;
+//use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
+//use Reminder;
 use Mail;
 
 class Student extends Controller
@@ -54,8 +54,23 @@ class Student extends Controller
             $cat->rollNO=$request->rollNo;
             $cat->course=$request->course;
             $cat->save();
+
+            //email data   
+            $email_data = array(
+                'name' => $request['Fname'],
+                'email' => $request['email'],
+            );  
+
+                //Send email with the template
+            Mail::send(['text'=>'mail'], $email_data, function($message) use ($email_data) {
+                $message->to($email_data['email'], $email_data['name'])
+                    ->subject('Successfull Registration');
+                $message->from('salswe1011@gmail.com', 'Salria Pereira');
+        });
+
             return redirect('student/student_login');
         }
+
     }
 
     public function student_login()
@@ -82,14 +97,14 @@ class Student extends Controller
 
     }
 
-    /*public function forgot(){
+   /* public function forgot(){
         return view('student.forgot');
     }
 
     public function password(Request $request){
         $student = studentDetails::whereEmail($request->email)->first();
 
-        if(count($student) == 0){
+        if($student == null){
             return redirect()->back()->with(['error' => 'Email not exists']);
         }
         $student = Sentinel::findById($student->PRNo);
