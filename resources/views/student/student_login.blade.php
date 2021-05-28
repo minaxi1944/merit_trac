@@ -79,22 +79,15 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- <div class="form-group row"> 
-                                <div class="col-md-6 offset-md-4">
-                                    <div class="form-check">
-                                        <label class="form-check-label" for="remember">
-                                            <a href="{{ url('/student/forgot_password') }}">Forgot password </a>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>-->
-
+                            
                             <div class="form-group row mb-0">
                                 <div class="col-md-8 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
                                         {{ __('Login') }}
                                     </button>
+                                    <a class="btn btn-link" href="forget-password">
+                                    Forgot Your Password ?
+                                </a>
                                 </div>
                             </div>
                             <div>
