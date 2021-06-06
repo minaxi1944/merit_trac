@@ -47,7 +47,11 @@ Route:: get('/student/student_dashboard','StudentOperation@student_dashboard');
 
 Route:: get('/student/student_logout','StudentOperation@student_logout');
 
+Route::get('/student/forget-password', 'ForgotPasswordController@getEmail');
+Route::post('/student/forget-password', 'ForgotPasswordController@postEmail');
 
+Route::get('/student/reset-password/{token}', 'ResetPasswordController@getPassword');
+Route::post('/student/reset-password2', 'ResetPasswordController@updatePassword');
 
 
 
